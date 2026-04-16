@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BİLGİSAYAR DESTEKLİ TEKNİK TESİM/BİLGİSAYAR DESTEKLİ ÇİZİM VİZE SONUÇLARI — Sınav Sonuçları Paylaşım</title>
+<style>
+:root{--bg:#f5f4f0;--surface:#fff;--border:#e2e0d8;--text:#181816;--muted:#6b6a64;--hint:#a09f98;--accent:#1a4fcc;--accent-bg:#eef2fc;--r:12px;--rs:8px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:3rem 1rem}
+.wrap{width:100%;max-width:440px}
+.logo{text-align:center;margin-bottom:2rem}
+.logo-icon{width:52px;height:52px;border-radius:14px;background:var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px}
+.logo h1{font-size:17px;font-weight:600;line-height:1.3}
+.logo p{font-size:13px;color:var(--muted);margin-top:4px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;margin-bottom:1rem}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.input-row{display:flex;gap:8px}
+input[type="text"]{flex:1;height:44px;padding:0 14px;border:1px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--text);font-size:16px;font-family:inherit;transition:border-color .15s}
+input[type="text"]:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(26,79,204,.08)}
+button{height:44px;padding:0 20px;background:var(--accent);color:#fff;border:none;border-radius:var(--rs);font-size:15px;font-family:inherit;font-weight:500;cursor:pointer;transition:background .15s;white-space:nowrap}
+button:hover{background:#153faa}
+.result{margin-top:1.25rem;border-radius:var(--rs);padding:1.5rem;text-align:center;border:1px solid var(--border);display:none}
+.result.show{display:block}
+.result-label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:6px}
+.result-num{font-size:56px;font-weight:700;letter-spacing:-2px;color:var(--text);line-height:1}
+.result-id{font-size:13px;color:var(--hint);margin-top:10px}
+.result.error .result-num{font-size:28px;letter-spacing:0;color:var(--muted)}
+.avg-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;text-align:center;margin-bottom:1rem}
+.avg-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.7px;color:var(--hint);margin-bottom:4px}
+.avg-num{font-size:26px;font-weight:600;color:var(--muted);letter-spacing:-0.5px}
+.avg-sub{font-size:11px;color:var(--hint);margin-top:3px}
+.footer{text-align:center;font-size:12px;color:var(--hint);margin-top:1rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">
+    <div class="logo-icon">📋</div>
+    <h1>BİLGİSAYAR DESTEKLİ TEKNİK TESİM/BİLGİSAYAR DESTEKLİ ÇİZİM VİZE SONUÇLARI</h1>
+    <p>Öğrenci numaranızı girerek notunuzu öğrenebilirsiniz.</p>
+  </div>
+  <div class="card">
+    <label>Öğrenci numaranız</label>
+    <div class="input-row">
+      <input type="text" id="sid" placeholder="Öğrenci numarası" onkeydown="if(event.key==='Enter')query()" autocomplete="off" />
+      <button onclick="query()">Sorgula</button>
+    </div>
+    <div class="result" id="result">
+      <div class="result-label" id="r-label"></div>
+      <div class="result-num" id="r-num"></div>
+      <div class="result-id" id="r-id"></div>
+    </div>
+  </div>
+  <div class="avg-box">
+    <div class="avg-label">Sınıf Ortalaması</div>
+    <div class="avg-num">57.2</div>
+    <div class="avg-sub">17 öğrenci</div>
+  </div>
+  <div class="footer">Sadece kendi numaranızı sorgulayabilirsiniz.</div>
+</div>
+<script>
+const G = {"22495933":48,"22496511":69,"22497275":32,"22497307":61,"22498754":42,"22593876":65,"22593912":90,"22594024":39,"22594761":74,"22595415":69,"22596334":23,"22596564":37,"22596608":87,"22596775":79,"22596841":72,"22597844":31,"22597996":55};
+function query() {
+  const sid = document.getElementById('sid').value.trim();
+  const box = document.getElementById('result');
+  const lbl = document.getElementById('r-label');
+  const num = document.getElementById('r-num');
+  const rid = document.getElementById('r-id');
+  if (!sid) return;
+  box.classList.add('show');
+  if (G[sid] !== undefined) {
+    box.className = 'result show';
+    box.style.background = '#f0f7ff';
+    box.style.borderColor = '#c5d8f7';
+    lbl.textContent = 'Notunuz';
+    num.textContent = G[sid];
+    rid.textContent = 'Öğrenci No: ' + sid;
+  } else {
+    box.className = 'result show error';
+    box.style.background = '#faf9f6';
+    box.style.borderColor = '#e2e0d8';
+    lbl.textContent = '';
+    num.textContent = 'Kayıt bulunamadı';
+    rid.textContent = 'Numarayı kontrol edip tekrar deneyin.';
+  }
+}
+</script>
+</body>
+</html>
